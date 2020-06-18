@@ -65,7 +65,7 @@ if model_exists == None:
     
 else:
     print('Model exists, creting new version')
-    register_model(model = model, 
+    register_model(model = astore, 
                    name= modelname, 
                    project= project,
                    force=True,
