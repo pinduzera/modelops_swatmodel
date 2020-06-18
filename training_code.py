@@ -29,7 +29,9 @@ conn.loadactionset("autotune")
 
 conn.sampling.stratified(
     table={"name":"HMEQ", "groupBy":"BAD", "caslib": "public"},
-    output={"casOut":{"name":"HMEQ_PART", "replace": True}, 
+    output={"casOut":{"name":"HMEQ_PART", 
+                      "caslib":"public",
+                      "replace": True}, 
             "copyVars":"ALL"},
     samppct=70,
     partind=True
