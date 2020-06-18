@@ -74,12 +74,14 @@ path = Path.cwd()
 
 ############################## 
 ######## adding files ########
+"""
+THIS SESSION IS BUGGED, CANNOT REPLACE FILE
 
 filenames = {'file':['training_code.py'],
             'role':['train']}
             
 #### uploading files
-
+model_repository.get_model_contents(modelname)
 for i in range(len(filenames['file'])):
 
     with open(path / filenames['file'][i], "rb") as _file:
@@ -88,13 +90,13 @@ for i in range(len(filenames['file'])):
                       model = modelname, 
                       file = _file, 
                       name = filenames['file'][i], 
-                      role= filenames['role'][i])
+                      role= filenames['role'][i],
+                         )
         
         print('uploaded ' + filenames['file'][i] + ' as ' + filenames['role'][i])
         _file.close()
-
+"""
 #### Publish model
-
 publish_model(modelname, publishdestination,
                   replace = True)
 
