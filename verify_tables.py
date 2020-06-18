@@ -9,8 +9,8 @@ Created on Thu Jun  4 15:01:52 2020
 import swat
 import sys
 
-conn = swat.CAS('pdcesx06128.exnet.sas.com', port=8777, protocol = 'http',
-             #'localhost', port = 5570, ## bug on swat 1.6.0
+conn = swat.CAS(#'pdcesx06128.exnet.sas.com', port=8777, protocol = 'http',
+             'localhost', port = 5570, ## bug on swat 1.6.0
             caslib = 'public', username = 'sasdemo',
             password = 'Orion123')
 
