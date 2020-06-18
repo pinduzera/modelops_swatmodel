@@ -64,18 +64,19 @@ if model_exists == None:
     
 else:
     print('Model exists, creting new version')
+    model_repository.delete_model(modelname)
     register_model(model = astore, 
                    name= modelname, 
                    project= project,
                    force=True,
                    version = 'latest')
-    
+
 path = Path.cwd()
 
 ############################## 
 ######## adding files ########
-"""
-THIS SESSION IS BUGGED, CANNOT REPLACE FILE
+
+#3THIS SESSION IS BUGGED, CANNOT REPLACE FILE
 
 filenames = {'file':['training_code.py'],
             'role':['train']}
@@ -95,7 +96,7 @@ for i in range(len(filenames['file'])):
         
         print('uploaded ' + filenames['file'][i] + ' as ' + filenames['role'][i])
         _file.close()
-"""
+
 #### Publish model
 publish_model(modelname, publishdestination,
                   replace = True)
