@@ -12,11 +12,10 @@ with open("session_id.txt", "r") as f:
     session_id = f.read()
     f.close()
 
-conn = swat.CAS(#'pdcesx06128.exnet.sas.com', port=8777, protocol = 'http',
-            'localhost', port = 5570, ## bug on swat 1.6.0
+conn = swat.CAS('pdcesx06128.exnet.sas.com', port=8777, protocol = 'http',
+            #'localhost', port = 5570, ## bug on swat 1.6.0
             caslib = 'public', username = 'sasdemo',
-            password = 'Orion123',
-            session = session_id)
+            password = 'Orion123')#, session = session_id)
 
 conn.loadactionset("sampling")
 conn.loadactionset("decisionTree")
@@ -100,9 +99,11 @@ result = conn.autotune.tuneGradientBoostTree(
         "copyvars":["BAD"]
    }
 )
-
-gb_score = conn.CASTable("gb_score")
-gb_score.head()
+db_astore = conn.CASTable("gb_astore",
+                           caslib = "public")
+conn.table.promote(db_astore)
+#gb_score = conn.CASTable("gb_score")
+#gb_score.head()
 
 
 ######

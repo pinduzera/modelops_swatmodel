@@ -9,15 +9,15 @@ Created on Thu Jun  4 15:01:52 2020
 import swat
 import sys
 
-conn = swat.CAS(#'pdcesx06128.exnet.sas.com', port=8777, protocol = 'http',
-             'localhost', port = 5570, ## bug on swat 1.6.0
-            caslib = 'casuser', username = 'sasdemo',
+conn = swat.CAS('pdcesx06128.exnet.sas.com', port=8777, protocol = 'http',
+             #'localhost', port = 5570, ## bug on swat 1.6.0
+            caslib = 'public', username = 'sasdemo',
             password = 'Orion123')
 
 session_id = list(conn.session.sessionId().values())[0]
 
 conn.sessionProp.setSessOpt(
-                           casLib="casuser", 
+                           casLib="public", 
                            timeOut=3600)
 
 tablenames = ['hmeq', 

@@ -14,8 +14,8 @@ import swat
 ###################################
 ####### Variables #################
 
-host = 'localhost'
-#pdcesx06128.exnet.sas.com
+#host = 'localhost'
+host = 'pdcesx06128.exnet.sas.com'
 
 publishdestination = 'maslocal'
 
@@ -40,8 +40,7 @@ with open("session_id.txt", "r") as f:
 conn = swat.CAS(#'pdcesx06128.exnet.sas.com', port=8777, protocol = 'http',
             host, port = 5570, ## bug on swat 1.6.0
             caslib = 'public', username = 'sasdemo',
-            password = 'Orion123',
-            session = session_id)
+            password = 'Orion123')#, session = session_id)
 
 
 astore = conn.CASTable(astore_table,
