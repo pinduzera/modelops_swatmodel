@@ -12,9 +12,10 @@ with open("session_id.txt", "r") as f:
     session_id = f.read()
     f.close()
 
-conn = swat.CAS('pdcesx06128.exnet.sas.com', port=8777, protocol = 'http',
-            #'localhost', port = 5570, ## bug on swat 1.6.0
-            caslib = 'public', username = 'sasdemo',
+conn = swat.CAS(#'pdcesx06128.exnet.sas.com', port=8777, protocol = 'http',
+            'localhost', port = 5570, ## bug on swat 1.6.0
+            #caslib = 'public', 
+            username = 'sasdemo',
             password = 'Orion123')#, session = session_id)
 
 conn.loadactionset("sampling")
@@ -29,7 +30,7 @@ conn.loadactionset("autotune")
 conn.sampling.stratified(
     table={"name":"HMEQ", "groupBy":"BAD", "caslib": "public"},
     output={"casOut":{"name":"HMEQ_PART", 
-                      "caslib":"public",
+                      #"caslib":"public",
                       "replace": True}, 
             "copyVars":"ALL"},
     samppct=70,
@@ -49,7 +50,7 @@ db_var_imp = conn.datapreprocess.impute(
 
 # Promoting table
 db_treated = conn.CASTable("hmeq_treated")
-conn.table.promote(db_treated)
+#conn.table.promote(db_treated)
 
 # Separacao de Colunas
 columns_info = conn.columninfo(table=db_treated).ColumnInfo
@@ -66,20 +67,19 @@ print(columns_char)
 print("Double columns:")
 print(columns_double)
 
-
 # Treinamento e Scoragem - Gradient Boosting
 result = conn.autotune.tuneGradientBoostTree(
     trainOptions = {
         "table"   : {"name":"hmeq_part", 
-                     "caslib":"public",
+                     #"caslib":"public",
                      "where": "_PartInd_=0"},
         "inputs"  : columns_double+columns_char,
         "target"  : target,
         "nominal" : columns_char+[target],
         "casout"  : {"name":"gb_train"},
-        "saveState": {"caslib":"public",   ### THIS IS THE ASTORE
-                     "name": "gb_astore"}, ### USED FOR PUBLICATION
-                                           ### OR exported for ESP
+        "saveState": {"name": "gb_astore"}  ### THIS IS THE ASTORE
+                                            ### USED FOR PUBLICATION
+                                            ### OR exported for ESP
     },
     tunerOptions={
          "maxIters": 5,
@@ -91,7 +91,7 @@ result = conn.autotune.tuneGradientBoostTree(
     },
     scoreOptions= {
         "table" : {"name":"hmeq_part", 
-                   "caslib": "public",
+                   #"caslib": "public",
                    "where": "_PartInd_=1"},
         "modeltable": {"name":"gb_train"},
         "casout":{"name":"gb_score", 
@@ -99,9 +99,8 @@ result = conn.autotune.tuneGradientBoostTree(
         "copyvars":["BAD"]
    }
 )
-db_astore = conn.CASTable("gb_astore",
-                           caslib = "public")
-conn.table.promote(db_astore)
+
+
 #gb_score = conn.CASTable("gb_score")
 #gb_score.head()
 

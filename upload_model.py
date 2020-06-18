@@ -14,8 +14,8 @@ import swat
 ###################################
 ####### Variables #################
 
-#host = 'localhost'
-host = 'pdcesx06128.exnet.sas.com'
+host = 'localhost'
+#host = 'pdcesx06128.exnet.sas.com'
 
 publishdestination = 'maslocal'
 
@@ -28,7 +28,7 @@ user = 'sasdemo'
 password = 'Orion123'
 
 astore_table = 'gb_astore'
-astore_caslib = 'public'
+#astore_caslib = 'public'
 
 ###################################
 ####### Getting astore table ######
@@ -39,12 +39,12 @@ with open("session_id.txt", "r") as f:
 
 conn = swat.CAS(#'pdcesx06128.exnet.sas.com', port=8777, protocol = 'http',
             host, port = 5570, ## bug on swat 1.6.0
-            caslib = 'public', username = 'sasdemo',
+            #caslib = 'public',
+            username = 'sasdemo',
             password = 'Orion123')#, session = session_id)
 
 
-astore = conn.CASTable(astore_table,
-                       caslib = astore_caslib)
+astore = conn.CASTable(astore_table)
 
 
 #### coneccting from SASCTL
