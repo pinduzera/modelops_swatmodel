@@ -11,8 +11,8 @@ from sasctl.services import microanalytic_score as mas
 ###################################
 ####### Variables #################
 
-#host = 'localhost'
-host = 'pdcesx12091.exnet.sas.com'
+host = 'localhost'
+#host = 'pdcesx12091.exnet.sas.com'
 
 publishdestination = 'maslocal'
 
@@ -50,7 +50,7 @@ res = module.score(clage=94.3, clno=9.0, debtinc=34.8, delinq=0,
              value=39025, yoj=10.5, 
              job="Other", reason="HomeImp")
 
-print(res)
+
 """
 DATA SAMPLE
 {'_PartInd_': {0: 0.0},

@@ -67,6 +67,11 @@ print(columns_char)
 print("Double columns:")
 print(columns_double)
 
+exists = conn.table.tableExists('gb_astore')
+
+if exists['exists'] == 2:
+    conn.table.dropTable('gb_astore')
+
 # Treinamento e Scoragem - Gradient Boosting
 result = conn.autotune.tuneGradientBoostTree(
     trainOptions = {
@@ -100,6 +105,8 @@ result = conn.autotune.tuneGradientBoostTree(
    }
 )
 
+
+conn.table.promote('gb_astore')
 
 #gb_score = conn.CASTable("gb_score")
 #gb_score.head()

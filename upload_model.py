@@ -14,8 +14,8 @@ import swat
 ###################################
 ####### Variables #################
 
-host = 'localhost'
-#host = 'pdcesx06128.exnet.sas.com'
+#host = 'localhost'
+host = 'pdcesx12091.exnet.sas.com'
 
 publishdestination = 'maslocal'
 
