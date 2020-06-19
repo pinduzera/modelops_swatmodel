@@ -15,7 +15,7 @@ import swat
 ####### Variables #################
 
 host = 'localhost'
-#host = 'pdcesx12091.exnet.sas.com'
+#host = 'pdcesx06128.exnet.sas.com'
 
 publishdestination = 'maslocal'
 
@@ -37,7 +37,7 @@ with open("session_id.txt", "r") as f:
     session_id = f.read()
     f.close()
 
-conn = swat.CAS(#'pdcesx12091.exnet.sas.com', port=8777, protocol = 'http',
+conn = swat.CAS(#'pdcesx06128.exnet.sas.com', port=8777, protocol = 'http',
             host, port = 5570, ## bug on swat 1.6.0
             #caslib = 'public',
             username = 'sasdemo',
@@ -45,6 +45,7 @@ conn = swat.CAS(#'pdcesx12091.exnet.sas.com', port=8777, protocol = 'http',
 
 
 astore = conn.CASTable(astore_table)
+
 
 #### coneccting from SASCTL
 s = Session(host, user, password,
@@ -59,8 +60,7 @@ if model_exists == None:
     model = register_model(astore, 
                            modelname, 
                            project,
-                           force = True,
-                           version = 'latest')
+                           force = True)
     
 else:
     print('Model exists, creting new version')

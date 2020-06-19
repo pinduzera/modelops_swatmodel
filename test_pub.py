@@ -50,7 +50,7 @@ res = module.score(clage=94.3, clno=9.0, debtinc=34.8, delinq=0,
              value=39025, yoj=10.5, 
              job="Other", reason="HomeImp")
 
-
+print(res)
 """
 DATA SAMPLE
 {'_PartInd_': {0: 0.0},
