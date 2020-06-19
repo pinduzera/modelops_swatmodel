@@ -14,8 +14,8 @@ import swat
 ###################################
 ####### Variables #################
 
-#host = 'localhost'
-host = 'pdcesx12091.exnet.sas.com'
+host = 'localhost'
+#host = 'pdcesx12091.exnet.sas.com'
 
 publishdestination = 'maslocal'
 
@@ -60,7 +60,8 @@ if model_exists == None:
     model = register_model(astore, 
                            modelname, 
                            project,
-                           force = True)
+                           force = True,
+                           version = 'latest')
     
 else:
     print('Model exists, creting new version')
