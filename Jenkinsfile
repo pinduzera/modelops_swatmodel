@@ -25,13 +25,12 @@ pipeline {
 
                 }
           }
-/*
+
       stage('Model Validation') {
         steps {
-          sh "Rscript --vanilla model_validation.R"
+          sh "python model_validation.py"
                 }
           }
-*/
 
       stage('Testing Publication') {
         steps {

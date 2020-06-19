@@ -67,11 +67,19 @@ print(columns_char)
 print("Double columns:")
 print(columns_double)
 
+droptables = ['gb_score', 'gb_astore']
+
+for tb in droptables:
+    exists = conn.table.tableExists(tb)
+    
+    if exists['exists'] == 2:
+        print("Dropping:" + tb)
+        conn.table.dropTable(tb)
+
 exists = conn.table.tableExists('gb_astore')
 
 if exists['exists'] == 2:
-    conn.table.dropTable('gb_astore')
-
+    conn.table.dropTable('gb_score')
 # Treinamento e Scoragem - Gradient Boosting
 result = conn.autotune.tuneGradientBoostTree(
     trainOptions = {
@@ -95,16 +103,17 @@ result = conn.autotune.tuneGradientBoostTree(
          "targetEvent" : "1"
     },
     scoreOptions= {
-        "table" : {"name":"hmeq_part", 
+        "table" : {"name":"hmeq_part"}, 
                    #"caslib": "public",
-                   "where": "_PartInd_=1"},
+                   #"where": "_PartInd_=1"},
         "modeltable": {"name":"gb_train"},
         "casout":{"name":"gb_score", 
                   "replace":1}, 
-        "copyvars":["BAD"]
+        "copyvars":["BAD", "_PartInd_"]
    }
 )
 
+conn.table.promote('gb_score')
 
 conn.table.promote('gb_astore')
 
