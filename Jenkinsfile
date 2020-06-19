@@ -31,13 +31,15 @@ pipeline {
           sh "Rscript --vanilla model_validation.R"
                 }
           }
+*/
+
       stage('Testing Publication') {
         steps {
           sh "python test_pub.py"
 
                 }
           }
-*/            
+           
         
     }
       post { 

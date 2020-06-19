@@ -12,7 +12,7 @@ with open("session_id.txt", "r") as f:
     session_id = f.read()
     f.close()
 
-conn = swat.CAS(#'pdcesx06128.exnet.sas.com', port=8777, protocol = 'http',
+conn = swat.CAS(#'pdcesx12091.exnet.sas.com', port=8777, protocol = 'http',
             'localhost', port = 5570, ## bug on swat 1.6.0
             #caslib = 'public', 
             username = 'sasdemo',
@@ -29,7 +29,7 @@ conn.loadactionset("autotune")
 
 conn.sampling.stratified(
     table={"name":"HMEQ", "groupBy":"BAD", "caslib": "public"},
-    output={"casOut":{"name":"HMEQ_PART", 
+    output={"casOut":{"name":"hmeq_part", 
                       #"caslib":"public",
                       "replace": True}, 
             "copyVars":"ALL"},
@@ -40,11 +40,11 @@ conn.sampling.stratified(
 
 # Value imputation
 db_var_imp = conn.datapreprocess.impute(
-                          table={"name": "HMEQ_PART",
-                                 "caslib": "public"},
+                          table={"name": "hmeq_part"},
+                                 #"caslib": "public"},
                           methodnominal = "mode",  
                           methodinterval ="median",
-                          casout={"name":"HMEQ_TREATED",
+                          casout={"name":"hmeq_treated",
                                   "replace":1},
                            outvarsnameprefix='')
 
