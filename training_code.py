@@ -33,7 +33,7 @@ conn.sampling.stratified(
                       #"caslib":"public",
                       "replace": True}, 
             "copyVars":"ALL"},
-    samppct=60,
+    samppct=70,
     partind=True
 )
 
