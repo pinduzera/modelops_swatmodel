@@ -15,7 +15,7 @@ import swat
 ####### Variables #################
 
 host = 'localhost'
-#host = 'pdcesx06128.exnet.sas.com'
+#host = 'hostname.com'
 
 publishdestination = 'maslocal'
 
@@ -23,9 +23,9 @@ modelname = 'gb_jk_swat'
 
 project = 'hmeq_os'
 
-user = 'sasdemo'
+user = 'username'
 
-password = 'Orion123'
+password = 's3cr3t!'
 
 astore_table = 'gb_astore'
 #astore_caslib = 'public'
@@ -37,11 +37,11 @@ with open("session_id.txt", "r") as f:
     session_id = f.read()
     f.close()
 
-conn = swat.CAS(#'pdcesx06128.exnet.sas.com', port=8777, protocol = 'http',
+conn = swat.CAS(#'hostname.com', port=8777, protocol = 'http',
             host, port = 5570, ## bug on swat 1.6.0
             #caslib = 'public',
-            username = 'sasdemo',
-            password = 'Orion123')#, session = session_id)
+            username = 'username',
+            password = 's3cr3t!')#, session = session_id)
 
 
 astore = conn.CASTable(astore_table)
